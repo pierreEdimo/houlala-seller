@@ -1,0 +1,54 @@
+<ng-container *ngIf="locationService.location$.loading$ | async else showLayout">
+    <app-center>
+      <app-loading></app-loading>
+    </app-center>
+</ng-container>
+<ng-template #showLayout>
+    <div class="flex">
+        <div class="p-2 h-full w-48 fixed bg-white shadow">
+           <ng-container *ngIf="location$ | async as location">
+             <div class="flex h-full relative flex-col">
+               <a class="p-2 hover:bg-orange-400 rounded" routerLinkActive="bg-orange-400"
+                  [routerLinkActiveOptions]="{exact:true}"
+                  [routerLink]="'/dashboard/' + location.uniqueIdentifier">
+                 <ng-icon name="heroHomeModern"></ng-icon>
+                 Dashboard
+               </a>
+               <a class="p-2 hover:bg-orange-400 rounded" routerLinkActive="bg-orange-400"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  [routerLink]="'/products/' + location.uniqueIdentifier">
+                 <ng-icon name="heroInboxStack"></ng-icon>
+                 Produits
+               </a>
+               <a class="p-2 hover:bg-orange-400 rounded" routerLinkActive="bg-orange-400"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  [routerLink]="'/orders/' + location.uniqueIdentifier">
+                 <ng-icon name="heroClipboardDocument"></ng-icon>
+                 Commandes
+               </a>
+               <a class="p-2 hover:bg-orange-400 rounded" href="#">
+                 <ng-icon name="heroChatBubbleLeftEllipsis"></ng-icon>
+                 Message
+               </a>
+               <a class="p-2 hover:bg-orange-400 rounded" href="#">
+                 <ng-icon name="heroBell"></ng-icon>
+                 Notification
+               </a>
+               <a class="p-2 hover:bg-orange-400 rounded" href="#">
+                 <ng-icon name="heroCog8Tooth"></ng-icon>
+                 Options
+               </a>
+               <button class="w-full absolute bottom-2 text-left p-2 rounded hover:bg-orange-400">
+                 <ng-icon name="heroArrowRightOnRectangle"></ng-icon>
+                 Se deconnecter
+               </button>
+             </div>
+           </ng-container>
+        </div>
+        <div class="pl-48 flex-1">
+            <div class="m-auto w-5/6 py-2">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</ng-template>

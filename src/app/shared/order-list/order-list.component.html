@@ -1,0 +1,56 @@
+<div class="p-3">
+  <div class="flex w-full justify-between items-center">
+    <p class="font-bold">{{title}}</p>
+    <div>
+      <ng-container *ngIf="isActionNeeded">
+        <app-more-button>
+          <ng-icon name="heroArrowLongRight"/>
+        </app-more-button>
+      </ng-container>
+      <ng-container *ngIf="isFilterNeeded">
+        <select (change)="changeFilterOrderStatus.emit(filterOrderStatus)"
+                [(ngModel)]="filterOrderStatus"
+                class="p-3 rounded w-64 cursor-pointer">
+          <option value="">Status</option>
+          <option value="Route">Route</option>
+          <option value="Traitement">Traitement</option>
+          <option value="Attente">Attente</option>
+          <option value="Delivre">Delivre</option>
+        </select>
+      </ng-container>
+    </div>
+  </div>
+  <br>
+  <table class="w-full">
+    <thead>
+      <tr class="text-left">
+        <th>Client</th>
+        <th>Date</th>
+        <th>Prix</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="cursor-pointer hover:bg-orange-400" *ngFor="let order of orderLists">
+        <td>
+          <div class="text-overflow">
+            {{order.userInformation.lastName}} {{order.userInformation.firstName}}
+          </div>
+        </td>
+        <td>
+          <div class="text-overflow">{{order.createdAt | date}}</div>
+        </td>
+        <td>
+          <div class="text-overflow">{{order.totalPrice}} XAF</div>
+        </td>
+        <td class="p-2 w-60">
+          <button (click)="updateOrderStatus.emit()"
+                  class="rounded py-3 w-full text-center bg-gray-200"
+                  [ngClass]="order.status">
+            {{order.status}}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

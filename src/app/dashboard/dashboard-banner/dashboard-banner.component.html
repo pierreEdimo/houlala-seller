@@ -1,0 +1,38 @@
+<div class="w-full flex gap-2">
+    <div class="flex-1 h-40 relative">
+        <app-card>
+            <p class="p-3 font-bold text-xl">Produits</p>
+            <div  class="flex absolute items-center bottom-2 p-3 w-full justify-between">
+                <img src="assets/image/box.png" class="w-10" />
+                {{productTotalCount}}
+            </div>
+        </app-card>
+    </div>
+    <div class="flex-1 h-40 relative">
+        <app-card>
+            <p class="p-3 font-bold text-xl">Commandes totales</p>
+            <div class="flex items-center absolute bottom-2 w-full p-3 justify-between">
+                <img src="assets/image/shopping-list.png" class="w-10" />
+                {{orderTotalCount}}
+            </div>
+        </app-card>
+    </div>
+    <div class="flex-1 h-40 relative">
+        <app-card>
+            <p class="p-3 font-bold text-xl">Ventes totales</p>
+            <div class="flex absolute items-center w-full bottom-2 p-3 justify-between">
+                <img src="assets/image/sold.png" class="w-10" />
+                {{orderSoldCount}}
+            </div>
+        </app-card>
+    </div>
+    <div class="flex-1 h-40 relative">
+        <app-card>
+            <p class="p-3 font-bold text-xl">Commandes annulees</p>
+            <div class="flex absolute bottom-2 items-center w-full p-3 justify-between">
+                <img src="assets/image/cancel.png" class="w-10" />
+                {{orderCanceledCount}}
+            </div>
+        </app-card>
+    </div>
+</div>

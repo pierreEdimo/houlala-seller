@@ -1,0 +1,50 @@
+<app-layout [location$]="location$">
+    <ng-container *ngIf="location$ | async as locationModel">
+        <ng-container *ngIf="locationModel">
+            <app-dashboard-banner [orderCanceledCount]="locationModel.orderCanceledCount"
+                [orderTotalCount]="locationModel.orderTotalCount" [orderSoldCount]="locationModel.orderSoldCount" />
+            <br>
+            <div class="flex gap-2">
+                <div style="flex: 3">
+                    <app-recent-orders [orders$]="recentOrders$" />
+                </div>
+                <div style="flex: 1;">
+                    <div style="height: 300px;">
+                        <app-card>
+                            <div class="p-3">
+                                <p class="font-bold">Les produits qui se vendent les mieux</p>
+                            </div>
+                        </app-card>
+                    </div>
+                    <br>
+                    <div style="height: 300px;">
+                        <app-card>
+                            <div class="p-3">
+                                <p class="font-bold">Les produits bientot en rupture de stock</p>
+                            </div>
+                        </app-card>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <app-card>
+              <ng-container *ngIf="productService.product$.loading$ | async; else showProducts">
+                <div class="h-28 w-full relative">
+                  <app-center>
+                    <app-loading/>
+                  </app-center>
+                </div>
+              </ng-container>
+              <ng-template #showProducts>
+                <ng-container *ngIf="products$ | async as products">
+                  <app-product-list [title]="'Appercu des produits'"
+                                    [isLoading]="(productService.product$.loading$ | async)!"
+                                    [isActionNeeded]="true"
+                                    [products]="products" />
+                </ng-container>
+
+              </ng-template>
+            </app-card>
+        </ng-container>
+    </ng-container>
+</app-layout>^

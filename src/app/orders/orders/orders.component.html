@@ -1,0 +1,19 @@
+<app-layout [location$]="location$">
+  <app-card>
+    <ng-container *ngIf="orderService.recentOrders$.loading$ | async; else showOrders">
+      <div class="h-96 w-full relative">
+        <app-center>
+          <app-loading/>
+        </app-center>
+      </div>
+    </ng-container>
+    <ng-template #showOrders>
+      <ng-container *ngIf="orders$ | async as orders">
+        <app-order-list [title]="'Les Commandes'"
+                        [isFilterNeeded]="true"
+                        (changeFilterOrderStatus)="changeFilterOrderStatus($event)"
+                        [orderLists]="orders | orderFilter : (orderStatus$ | async)!"/>
+      </ng-container>
+    </ng-template>
+  </app-card>
+</app-layout>

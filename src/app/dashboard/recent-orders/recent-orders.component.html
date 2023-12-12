@@ -1,0 +1,15 @@
+<ng-container *ngIf="orders$ | async as orders">
+    <app-card>
+        <ng-container *ngIf="orderService.recentOrders$.loading$ | async; else showOrders">
+          <div class="relative w-full h-full">
+            <app-center>
+              <app-loading/>
+            </app-center>
+          </div>
+        </ng-container>
+        <ng-template #showOrders>
+            <app-dashboard-orders [title]="'Les commandes recentes'"
+                                  [orders]="orders"/>
+        </ng-template>
+    </app-card>
+</ng-container>

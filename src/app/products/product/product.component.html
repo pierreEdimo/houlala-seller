@@ -1,0 +1,16 @@
+<app-layout [location$]="location$">
+  <app-card>
+    <ng-container *ngIf="productService.product$.loading$ | async; else showProducts">
+      <div class="h-96 w-full relative">
+        <app-center>
+          <app-loading/>
+        </app-center>
+      </div>
+    </ng-container>
+    <ng-template #showProducts>
+      <ng-container *ngIf="products$ | async as products">
+        <app-product-list [title]="'Les Produits'" [products]="products"/>
+      </ng-container>
+    </ng-template>
+  </app-card>
+</app-layout>

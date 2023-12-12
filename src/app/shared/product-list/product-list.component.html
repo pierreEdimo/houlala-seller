@@ -1,0 +1,39 @@
+        <div class="p-3">
+            <div class="flex w-full justify-between items-center">
+              <p class="font-bold">{{title}}</p>
+              <ng-container *ngIf="isActionNeeded">
+                <app-more-button>
+                  <ng-icon name="heroArrowLongRight"/>
+                </app-more-button>
+              </ng-container>
+            </div>
+            <br>
+            <table class="w-full">
+              <thead>
+              <tr class="text-left">
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>Date de creation</th>
+                <th>Date d'arrivee</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="hover:bg-orange-400 cursor-pointer" *ngFor="let product of products">
+                <td class="py-2">
+                  <div class="flex items-center gap-2">
+                    <div class="rounded-full overflow-hidden h-11 w-11">
+                      <img  [src]="product.imageUrl"/>
+                    </div>
+                    {{product.name}}
+                  </div>
+                </td>
+                <td>{{product.sellingPrice}}XAF</td>
+                <td>{{product.quantity}}</td>
+                <td>n/a</td>
+                <td>{{product.arrivalDate | date}}</td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+

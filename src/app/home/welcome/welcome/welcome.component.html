@@ -1,0 +1,17 @@
+<ng-container *ngIf="locationService.location$.loading$ | async; else locationButton">
+    <app-center>
+      <app-loading/>
+    </app-center>
+</ng-container>
+
+<ng-template #locationButton>
+    <ng-container *ngIf="location$ | async as locationModel">
+        <app-center>
+            <button (click)="navigateTo(locationModel.uniqueIdentifier)" style="width: 250px;"
+                class="p-3 border shadow rounded flex items-center flex-col gap-3">
+                <img src={{locationModel.imageUrl}} class="w-14 h-14 rounded-full"  alt="logo"/>
+                <p class="font-bold">{{locationModel.name}}</p>
+            </button>
+        </app-center>
+    </ng-container>
+</ng-template>
